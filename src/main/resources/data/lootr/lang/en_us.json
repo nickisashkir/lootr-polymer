@@ -14,5 +14,10 @@
     "lootr.message.refreshed": "The contents of the container are refreshed at your touch!",
     "lootr.message.should_sneak": "Breaking the chest will delete your unique loot and all items in the chest! In order to break, you must sneak while doing so.",
     "lootr.message.should_sneak2": "As loot is %s, only break if really needed.",
-    "lootr.message.should_sneak3": "per-player per-chest"
+    "lootr.message.should_sneak3": "per-player per-chest",
+    "tag.item.lootr.barrels": "Lootr Barrels",
+    "tag.item.lootr.chests": "Lootr Chests",
+    "tag.item.lootr.containers": "Lootr Containers",
+    "tag.item.lootr.shulkers": "Lootr Shulkers",
+    "tag.item.lootr.trapped_chests": "Trapped Lootr Chests"
 }
