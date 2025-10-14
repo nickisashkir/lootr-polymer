@@ -39,10 +39,10 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    modImplementation include("eu.pb4:polymer-core:0.13.11+1.21.8")
-    modImplementation include("xyz.nucleoid:server-translations-api:2.5.1+1.21.5")
-    modImplementation include("eu.pb4:polymer-virtual-entity:0.13.11+1.21.8")
-    modImplementation "maven.modrinth:lootr:5T0cn166"
+    modImplementation include("eu.pb4:polymer-core:0.14.2+1.21.9")
+    modImplementation include("xyz.nucleoid:server-translations-api:2.5.2+1.21.9-pre3")
+    modImplementation include("eu.pb4:polymer-virtual-entity:0.14.2+1.21.9")
+    modImplementation "maven.modrinth:lootr:T2K9YC05"
 }
 
 processResources {
