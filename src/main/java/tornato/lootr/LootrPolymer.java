@@ -1,8 +1,8 @@
 package tornato.lootr;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
+import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
+import net.fabricmc.fabric.api.resource.v1.pack.PackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -29,6 +29,6 @@ public class LootrPolymer implements ModInitializer {
     @Override
     public void onInitialize() {
         FabricLoader.getInstance().getModContainer(ID).ifPresent(modContainer ->
-                ResourceManagerHelper.registerBuiltinResourcePack(id("lootr_polymer"), modContainer, Text.of("Lootr Polymer"), ResourcePackActivationType.DEFAULT_ENABLED));
+                ResourceLoader.registerBuiltinPack(id("lootr_polymer"), modContainer, Text.of("Lootr Polymer"), PackActivationType.ALWAYS_ENABLED));
     }
 }
