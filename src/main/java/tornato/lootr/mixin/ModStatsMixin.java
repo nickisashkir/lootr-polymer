@@ -8,10 +8,10 @@ import org.spongepowered.asm.mixin.Overwrite;
 public class ModStatsMixin {
     /**
      * @author TorNato
-     * @reason Cancelling registration of statistic. Needless bloat and idk how to make the client ignore it.
+     * @reason Suppress registration of Lootr's custom statistic — it would
+     * appear on every vanilla client as an unknown stat ID.
      */
     @Overwrite(remap = false)
     public static void registerStats() {
-
     }
 }

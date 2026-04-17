@@ -1,19 +1,26 @@
 package tornato.lootr.mixin;
 
 import eu.pb4.polymer.core.api.entity.PolymerEntityUtils;
-import net.minecraft.entity.EntityType;
+import net.minecraft.world.entity.EntityType;
 import noobanidus.mods.lootr.common.entity.LootrChestMinecartEntity;
+import noobanidus.mods.lootr.common.entity.LootrItemFrame;
 import noobanidus.mods.lootr.fabric.init.ModEntities;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ModEntities.class)
 public class ModEntitiesMixin {
-    @ModifyArg(method = "registerEntities", at = @At(value = "INVOKE", target = "Lnet/minecraft/registry/Registry;register(Lnet/minecraft/registry/Registry;Lnet/minecraft/util/Identifier;Ljava/lang/Object;)Ljava/lang/Object;"), index = 2)
-    private static Object registerPolymerEntities(Object entry) {
-        //noinspection unchecked
-        PolymerEntityUtils.registerOverlay((EntityType<LootrChestMinecartEntity>) entry, entity -> context -> EntityType.CHEST_MINECART);
-        return entry;
+    @Inject(method = "registerEntities", at = @At("TAIL"))
+    private static void lootrPolymer$registerEntityOverlays(CallbackInfo ci) {
+        PolymerEntityUtils.registerOverlay(
+                (EntityType<LootrChestMinecartEntity>) (EntityType<?>) ModEntities.MINECART_WITH_CHEST,
+                entity -> context -> EntityType.CHEST_MINECART
+        );
+        PolymerEntityUtils.registerOverlay(
+                (EntityType<LootrItemFrame>) (EntityType<?>) ModEntities.ITEM_FRAME,
+                entity -> context -> EntityType.ITEM_FRAME
+        );
     }
 }
