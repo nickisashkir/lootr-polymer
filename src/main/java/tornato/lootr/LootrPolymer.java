@@ -1,14 +1,19 @@
 package tornato.lootr;
 
+import eu.pb4.polymer.rsm.api.RegistrySyncUtils;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
 import net.fabricmc.fabric.api.resource.v1.pack.PackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import noobanidus.mods.lootr.fabric.init.ModBlocks;
+import noobanidus.mods.lootr.fabric.init.ModParticles;
+import noobanidus.mods.lootr.fabric.init.ModStats;
 
 import java.util.Map;
 
@@ -34,7 +39,7 @@ public class LootrPolymer implements ModInitializer {
             ModBlocks.DECORATED_POT, Blocks.DECORATED_POT,
             // Trophy is a custom HorizontalDirectional block; player head is the
             // closest vanilla approximation. Not pixel-perfect, refine if needed.
-            ModBlocks.TROPHY, Blocks.PLAYER_HEAD
+            ModBlocks.TROPHY, Blocks.BLAST_FURNACE
     );
 
     @Override
@@ -45,5 +50,14 @@ public class LootrPolymer implements ModInitializer {
                         modContainer,
                         Component.literal("Lootr Polymer"),
                         PackActivationType.ALWAYS_ENABLED));
+
+        excludeFromSync(BuiltInRegistries.CUSTOM_STAT, ModStats.LOOTED_LOCATION);
+        RegistrySyncUtils.setServerEntry(BuiltInRegistries.PARTICLE_TYPE, ModParticles.UNOPENED_PARTCLE);
+        RegistrySyncUtils.setServerEntry(BuiltInRegistries.PARTICLE_TYPE, ModParticles.REFRESH_PARTICLE);
+    }
+
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    private static void excludeFromSync(Registry registry, Object entry) {
+        RegistrySyncUtils.setServerEntry(registry, entry);
     }
 }
