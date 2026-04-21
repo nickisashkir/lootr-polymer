@@ -20,6 +20,11 @@ import org.joml.Vector3f;
 
 public class LootrInventoryRenderer implements BlockWithElementHolder {
     @Override
+    public boolean tickElementHolder(ServerLevel world, BlockPos pos, BlockState state) {
+        return true;
+    }
+
+    @Override
     public @Nullable ElementHolder createElementHolder(ServerLevel world, BlockPos pos, BlockState initialBlockState) {
         var holder = new LootrElementHolder();
 
