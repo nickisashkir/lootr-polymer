@@ -1,7 +1,7 @@
 package tornato.lootr.mixin;
 
 import eu.pb4.polymer.core.api.entity.PolymerEntityUtils;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.entity.EntityType;
 import noobanidus.mods.lootr.common.entity.LootrChestMinecartEntity;
 import noobanidus.mods.lootr.common.entity.LootrItemFrame;
 import noobanidus.mods.lootr.fabric.init.ModEntities;
@@ -15,7 +15,7 @@ public class ModEntitiesMixin {
     @Inject(method = "registerEntities", at = @At("TAIL"))
     private static void lootrPolymer$registerEntityOverlays(CallbackInfo ci) {
         PolymerEntityUtils.registerOverlay(
-                (EntityType<LootrChestMinecartEntity>) (EntityType<?>) ModEntities.MINECART_WITH_CHEST,
+                (EntityType<LootrChestMinecartEntity>) (EntityType<?>) ModEntities.LOOTR_MINECART_ENTITY,
                 entity -> context -> EntityType.CHEST_MINECART
         );
         PolymerEntityUtils.registerOverlay(

@@ -1,5 +1,5 @@
 plugins {
-    id 'net.fabricmc.fabric-loom' version '1.15-SNAPSHOT'
+    id 'fabric-loom' version "${loom_version}"
     id 'maven-publish'
 }
 
@@ -12,30 +12,20 @@ base {
 
 repositories {
     maven { url 'https://maven.nucleoid.xyz' }
-
-    exclusiveContent {
-        forRepository {
-            maven {
-                name = "Modrinth"
-                url = "https://api.modrinth.com/maven"
-            }
-        }
-        filter {
-            includeGroup "maven.modrinth"
-        }
-    }
+    flatDir { dirs 'libs' }
 }
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
-    implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 
-    implementation include("eu.pb4:polymer-core:${project.polymer_version}")
-    implementation include("eu.pb4:polymer-virtual-entity:${project.polymer_version}")
+    modImplementation include("eu.pb4:polymer-core:${project.polymer_version}")
+    modImplementation include("eu.pb4:polymer-virtual-entity:${project.polymer_version}")
 
-    // Lootr fabric for 26.1 - version id s0EnSZFB on Modrinth
-    implementation "maven.modrinth:lootr:s0EnSZFB"
+    // Lootr fabric for 1.21.11 (current: 1.20.34.102)
+    modImplementation name: 'lootr-fabric-1.21.11-1.20.34.102'
 }
 
 processResources {
@@ -51,7 +41,7 @@ processResources {
     }
 }
 
-def targetJavaVersion = 25
+def targetJavaVersion = 21
 tasks.withType(JavaCompile).configureEach {
     it.options.encoding = "UTF-8"
     it.options.release.set(targetJavaVersion)
@@ -79,4 +69,10 @@ publishing {
         }
     }
     repositories {}
+}
+
+loom {
+    mixin {
+        defaultRefmapName = "LootrPolymer-refmap.json"
+    }
 }

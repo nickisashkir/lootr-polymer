@@ -1,7 +1,7 @@
 package tornato.lootr.mixin;
 
-import net.minecraft.world.RandomizableContainer;
-import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.inventory.LootableInventory;
 import noobanidus.mods.lootr.common.block.entity.BlockEntityTicker;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -25,7 +25,7 @@ public class BlockEntityTickerMixin {
     }
 
     private static boolean isDatapackContainer(BlockEntity blockEntity) {
-        if (blockEntity instanceof RandomizableContainer container) {
+        if (blockEntity instanceof LootableInventory container) {
             return container.getLootTable() == null;
         }
         return false;

@@ -20,8 +20,8 @@
     "depends": {
         "fabricloader": ">=${loader_version}",
         "fabric-api": "*",
-        "minecraft": ">=26.1 <26.2",
-        "java": ">=25",
+        "minecraft": ">=1.21.11 <1.22",
+        "java": ">=21",
         "lootr": "*",
         "polymer-core": "*",
         "polymer-virtual-entity": "*"

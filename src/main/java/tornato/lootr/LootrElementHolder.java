@@ -1,11 +1,11 @@
 package tornato.lootr;
 
 import eu.pb4.polymer.virtualentity.api.ElementHolder;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.BlockPos;
 import noobanidus.mods.lootr.common.api.data.blockentity.ILootrBlockEntity;
 
 public class LootrElementHolder extends ElementHolder {
@@ -21,9 +21,9 @@ public class LootrElementHolder extends ElementHolder {
         var attachment = getAttachment();
         if (attachment == null) return;
 
-        ServerLevel world = attachment.getWorld();
+        ServerWorld world = attachment.getWorld();
         var pos = attachment.getPos();
-        BlockPos blockPos = BlockPos.containing(pos);
+        BlockPos blockPos = BlockPos.ofFloored(pos);
 
         BlockEntity be = world.getBlockEntity(blockPos);
         if (!(be instanceof ILootrBlockEntity lootrBE)) return;
@@ -32,9 +32,9 @@ public class LootrElementHolder extends ElementHolder {
         double y = center.y + lootrBE.getParticleYOffset() + 0.5;
 
         for (var handler : getWatchingPlayers()) {
-            ServerPlayer player = handler.getPlayer();
+            ServerPlayerEntity player = handler.player;
             if (!lootrBE.hasServerOpened(player)) {
-                world.sendParticles(player, ParticleTypes.ENCHANT, false, false,
+                world.spawnParticles(player, ParticleTypes.ENCHANT, false, false,
                         center.x, y, center.z, 3, 0.15, 0.1, 0.15, 0.02);
             }
         }
